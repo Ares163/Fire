@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fire.mapper.ModuleMapper">
+	
+	<insert id="addModule" parameterType="com.fire.model.Module">
+		insert into
+			module_tab(name,parent_id,level)
+		values(#{name},#{parentId},#{level})
+	</insert>
+	
+	<!-- 修改标签 -->
+	<update id="updateModule" parameterType="com.fire.model.Module">
+		update
+			module_tab
+		set
+			name=#{name}
+		where
+			id=#{id}
+		and
+			level=2
+	</update>
+	
+	
+	
+	<!-- 删除模块 -->
+	<delete id="deleteModule">
+		delete
+			from module_tab
+		where
+			id=#{id}
+		and
+			level=2
+	</delete>
+	
+	<!-- 查询模块 -->
+	<select id="queryModule" parameterType="com.fire.model.Module" resultType="com.fire.model.Module">
+		select
+			id,
+			name,
+			parent_id parentId,
+			level
+		from
+			module_tab
+		<where>
+			<if test="parentId != null">
+				and parent_id = #{parentId}
+			</if>
+			<if test="level != null">
+				and level = #{level}
+			</if>
+		</where>
+					
+	</select>
+	
+	<select id = "getModule" resultType="com.fire.model.Module">
+		select
+			id,
+			name,
+			parent_id parentId,
+			level
+		from
+			module_tab
+		<where>
+			id = #{id}
+			<if test="level != null">
+				and level = #{level}
+			</if>
+		</where>
+	</select>
+		
+</mapper>

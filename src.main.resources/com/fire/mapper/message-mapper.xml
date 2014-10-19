@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fire.mapper.MessageMapper">
+	<insert id="addMessage" parameterType="com.fire.model.Message">
+		insert into
+			message_tab(author,message,create_date)
+		value(#{author},#{message},now())
+	</insert>
+	
+	<update id="updateMessage" parameterType="com.fire.model.Message">
+		update
+			message_tab
+		set
+			response=#{response},
+			responser=#{responser},
+			update_date=now()
+		where
+			id=#{id}
+	</update>
+	
+	<select id="queryMessage" resultType="com.fire.model.Message">
+		select
+			id,
+			author,
+			message,
+			response,
+			responser,
+			create_date createDate,
+			update_date updateDate
+		from
+			message_tab
+		order
+			by create_date desc
+	</select>
+	
+	<select id="getMessageCount" resultType="java.lang.Integer">
+		select
+			count(1)
+		from
+			message_tab
+	</select>
+	
+	<select id="deleteMessage">
+		delete
+			from message_tab
+		where
+			id=#{id}
+	</select>
+</mapper>

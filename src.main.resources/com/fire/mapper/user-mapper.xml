@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fire.mapper.UserMapper">
+   <update id="updatePassword">
+   		update
+   			user_tab
+   		set
+   			password=#{password}
+   		where
+   			user_name=#{userName}
+   </update>
+
+   <select id="checkUser" resultType="com.fire.model.User">
+   		select
+   			user_name userName
+   		from
+   			user_tab
+   		where
+   			user_name=#{userName}
+   		and
+   			password=#{password}
+   		and
+   			type = 2
+   </select>
+
+</mapper>

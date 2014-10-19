@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fire.mapper.ArticleMapper">
+	<insert id="addArticle" parameterType="com.fire.model.Article">
+		insert into 
+		      article_tab(title,content,author,module_id,is_top,
+		      is_publish,create_date,update_date,hit_count,
+		      origin,brief,thumbnail)
+		values(#{title},#{content},#{author,jdbcType=VARCHAR},#{moduleId},#{isTop,jdbcType=INTEGER},
+			#{isPublish,jdbcType=INTEGER},now(),now(),0,
+			#{origin,jdbcType=VARCHAR},#{brief,jdbcType=VARCHAR},#{thumbnail,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="updateArticle" parameterType="com.fire.model.Article">
+		update
+			article_tab
+		<set>
+			<if test="title != null and title != ''">
+				title=#{title},
+			</if>
+			<if test="content != null and content != ''">
+				content=#{content},
+			</if>
+			<if test="author != null">
+				author=#{author},
+			</if>
+			<if test="isTop != null">
+				is_top=#{isTop},
+			</if>
+			<if test="isPublish != null">
+				is_publish=#{isPublish},
+			</if>
+			<if test="origin != null">
+				origin=#{origin},
+			</if>
+			<if test="brief != null">
+				brief=#{brief},
+			</if>
+			<if test="thumbnail != null">
+				thumbnail=#{thumbnail},
+			</if>
+		</set>
+		where
+			id=#{id}
+	</update>
+	
+	<select id="getArticle" resultType="com.fire.model.Article">
+		select
+			id,
+			title,
+			content,
+			author,
+			is_top isTop,
+			is_publish isPublish,
+			create_date createDate,
+			update_date updateDate,
+			hit_count hitCount,
+			origin,
+			brief,
+			thumbnail
+		from
+			article_tab
+		where
+			id=#{id}
+	</select>
+
+	<select id="queryArticle" resultType="com.fire.model.Article">
+		select
+			id,
+			title,
+			author,
+			is_top isTop,
+			is_publish isPublish,
+			create_date createDate,
+			update_date updateDate,
+			hit_count hitCount,
+			origin,
+			brief,
+			thumbnail
+		from
+			article_tab
+		where
+			module_id=#{moduleId}
+		order by
+			is_top desc,update_date desc
+	</select>
+	
+	<select id="getArticleCount" resultType="java.lang.Integer">
+		select
+			count(1)
+		from
+			article_tab
+		where
+			module_id=#{moduleId}
+	</select>
+	
+	<delete id="deleteArticle">
+		delete
+			from article_tab
+		where
+			id=#{id}
+	</delete>
+	
+</mapper>
