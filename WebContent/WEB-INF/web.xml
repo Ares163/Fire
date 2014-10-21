@@ -64,6 +64,7 @@
   		<listener-class>com.fire.web.listener.InitListener</listener-class> 
   	</listener>
 	
+	
 	<!-- 配置Spring核心控制器 -->
 	<servlet>
 		<servlet-name>fire</servlet-name>
@@ -88,7 +89,7 @@
     </session-config>
 
 	<welcome-file-list>
-		<welcome-file>index</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
 	<error-page>
