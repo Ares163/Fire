@@ -56,11 +56,11 @@ public class ModuleService {
 	public List<Module> queryAllModule(){
 		Module module = new Module();
 		module.setLevel(1);
-		List<Module> moduleList = queryModule(module);
+		List<Module> moduleList = moduleMapper.queryModule(module);
 		for(Module m:moduleList){
 			Module query = new Module();
 			query.setParentId(m.getId());
-			List<Module> mList = queryModule(query);
+			List<Module> mList = moduleMapper.queryModule(query);
 			if(mList != null && mList.size() >0){
 				m.setSubModuleList(mList);
 			}

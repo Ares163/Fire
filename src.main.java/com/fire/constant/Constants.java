@@ -20,5 +20,7 @@ public class Constants {
 
 	/** 禁止访问*/
 	public static final String PRIVILEGE_FORBIDDEN_CODE = "300";
+	
+	public static final String USER = "user";
 
 }

@@ -3,12 +3,14 @@ package com.fire.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fire.dao.MessageDao;
 import com.fire.mapper.MessageMapper;
 import com.fire.model.Message;
 import com.fire.model.PageBean;
 
+@Service("messageServie")
 public class MessageService {
 	@Autowired
 	private MessageMapper messageMapper;
